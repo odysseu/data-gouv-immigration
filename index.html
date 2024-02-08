@@ -8,11 +8,19 @@
 </head>
 <body>
   <h1>GitHub Pages Python Website</h1>
-  <button onclick="renderTable()">Show Table</button>
-  <button onclick="renderGraphics()">Show Graphics</button>
+  <button onclick="renderContent('table')">Show Table</button>
+  <button onclick="renderContent('graphics')">Show Graphics</button>
 
   <div id="content"></div>
 
-  <script src="main.js"></script>
+  <script>
+    function renderContent(type) {
+      fetch(`/api/render?type=${type}`)
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('content').innerHTML = data;
+        });
+    }
+  </script>
 </body>
 </html>
